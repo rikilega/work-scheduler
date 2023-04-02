@@ -18,7 +18,33 @@ $(document).ready(function () {
             $(this).addClass("future");
             $(this).find("textarea").addClass("future");
         }
+    });
+
+    //Load any saved entries from local storage
+    $(".time-block").each(function () {
+        var time = $(this).attr("id");
+        var text = localStorage.getItem(time);
+        var textarea = $("this").children("description").children("textarea");
+
+        if (text) {
+            textarea.val(text)
+            textarea.attr("disabled", true)
+        }
+    });
+
+    //save entry to local storage and disable the text area once saved
+    $(".saveBtn").on("click", function() {
+        var time = $(this).parent().attr("id");
+        var text = $(this).siblings(".description").children("textarea").val().trim();
+        localStorage.setItem(time, text);
+        $(this).siblings(".description").children("textarea").attr("disabled", true); // add disabled attribute to textarea
+    });
+    //allow editing of a saved entry.
+    $(".editBtn").on("click", function() {
+        var textarea = $(this).siblings(".description").find("textarea");
+        textarea.prop("disabled", false);
     })
-});
+
+});    
 
 
