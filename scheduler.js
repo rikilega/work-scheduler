@@ -1,16 +1,14 @@
 $(document).ready(function () {
 
     setInterval(function() {
-        console.log("its working")
         var currentDay = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
-        // use currentDay variable here as needed
         $("#currentDay").text(currentDay);
-        console.log($("#currentDay").text())
     }, 300);
 
     var currentHour = dayjs().hour();
 
-    //Loop through time blocks and set class based on current hour block
+    // Loop through time blocks compare with currentHour and set class based on 
+    // current hour block
     $(".time-block").each(function() {
         var blockHour = parseInt($(this).attr("id").split("-")[1]);
         if (blockHour < currentHour) {
@@ -53,14 +51,14 @@ $(document).ready(function () {
             var text = $(this).siblings(".description").children("textarea").val().trim();
             localStorage.setItem(time, text);
         }
-
-        
+        //remove confirmation message from display
         setTimeout (() => {
             savedConf.css("display", "none");
         }, 1000);
-
+        //disable textarea for text entry
         $(this).siblings(".description").children("textarea").attr("disabled", true); // add disabled attribute to textarea;
     });
+    
     //allow editing of a saved entry.
     $(".editBtn").on("click", function() {
         var textarea = $(this).siblings(".description").find("textarea");
