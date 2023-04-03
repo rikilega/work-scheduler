@@ -1,7 +1,12 @@
 $(document).ready(function () {
 
-    var currentDay = dayjs().format("dddd, MMMM D, YYYY h:mm A");
-    $("#currentDay").text(currentDay);
+    setInterval(function() {
+        console.log("its working")
+        var currentDay = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
+        // use currentDay variable here as needed
+        $("#currentDay").text(currentDay);
+        console.log($("#currentDay").text())
+    }, 300);
 
     var currentHour = dayjs().hour();
 
@@ -53,8 +58,6 @@ $(document).ready(function () {
         setTimeout (() => {
             savedConf.css("display", "none");
         }, 1000);
-
-   
 
         $(this).siblings(".description").children("textarea").attr("disabled", true); // add disabled attribute to textarea;
     });
