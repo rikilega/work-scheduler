@@ -30,8 +30,8 @@ $(document).ready(function () {
         var textarea = $(this).children(".description").children("textarea");
         
         if (text) {
-            textarea.val(text)
-            textarea.attr("disabled", true)
+            textarea.val(text);
+            textarea.attr("disabled", true);
         }
     });
 
@@ -40,11 +40,33 @@ $(document).ready(function () {
         
         var savedConf = $("header").children("#saved-entry");
         var textarea = $(this).siblings(".description").children("textarea");
-        if (textarea.prop("disabled")) {
+        var parent = $(this).parent(); // get the parent element
+        var time = parent.attr("id"); // get the id attribute of the parent element
+        if (textarea.val() === '') {
+            localStorage.removeItem(time);
+            alert("There is nothing to save");
+            async function functionWithAlertHandling() {
+                console.log("Alert shown");
+                await new Promise((delay) => {
+                    const intervalId = setInterval(() => {
+                        const alert = window.alert;
+                        if (alert) {
+                        clearInterval(intervalId);
+                        console.log("alert dismissed");
+                        delay();
+                        }
+                    },500);
+                });
+            location.reload();
+            console.log("page reloaded");
+            }
+            // Call function to wait for the alert to be dismissed
+            functionWithAlertHandling();
+            console.log("wfunctionWithAlertHandling called");
+
+        }   else if (textarea.prop("disabled")) {
             savedConf.css("display", "none")
             alert("Please click the edit button and make changes before saving.");
-        }   else if (textarea.val() === '') {
-            alert("There is nothing to save")
         }   else {
             savedConf.css("display", "block")
             var time = $(this).parent().attr("id");
