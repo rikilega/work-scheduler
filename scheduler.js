@@ -45,7 +45,7 @@ $(document).ready(function () {
         if (textarea.val() === '') {
             localStorage.removeItem(time);
             alert("There is nothing to save");
-            async function functionWithAlertHandling() {
+            async function reloadfix() {
                 console.log("Alert shown");
                 await new Promise((delay) => {
                     const intervalId = setInterval(() => {
@@ -60,9 +60,9 @@ $(document).ready(function () {
             location.reload();
             console.log("page reloaded");
             }
-            // Call function to wait for the alert to be dismissed
-            functionWithAlertHandling();
-            console.log("wfunctionWithAlertHandling called");
+            // Call function to wait for 
+            reloadfix();
+            
 
         }   else if (textarea.prop("disabled")) {
             savedConf.css("display", "none")
